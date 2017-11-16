@@ -1,0 +1,72 @@
+
+<html>
+	<head>
+		<title>Esempio di windows.postmessage iframe</title>
+		<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+		<script>
+			var counter = 0;
+			function sendMessage(m)
+			{
+				var message;
+				var domain = 'http://mob.is.it';
+				var messages = [
+					'messaggio di test - prova 123',
+					'Klaatu Barada Nikto!',
+					'Aio\' butta la pasta',
+					'We are on a mission from God',
+					'Message in a bottle',
+					'I\'m sending an SOS to the world',
+					'Funziona!!!',
+					'E andiamo!',
+					'Che lo Sforzo sia con te',
+					'postMessage e\' una figata',
+					'HTML5 FTW!!'
+				];
+
+				if (m)
+				{
+					message = m;
+				}
+				else if (counter < 3)
+				{
+					message = 'messaggio di test #' + (counter + 1);
+				}
+				else if (counter >= 10)
+				{
+					message = 'Oh ma la vuoi smettere?!?';
+				}
+				else
+				{
+					message = messages[Math.floor(Math.random() * messages.length)];
+				}
+				var iframe = document.getElementById('mobisit').contentWindow;
+				iframe.postMessage(message, domain);
+				counter++;
+				if (message == 'reset')
+				{
+					counter = 0;
+				}
+			}
+		</script>
+	</head>
+
+
+	<body style="text-align: center;">
+		<h1>
+			Questa pagina si trova su <strong>http://html5today.it</strong>
+		</h1>
+
+		<br>
+		<button onClick="sendMessage();">
+			Manda un messaggio alla pagina nell'iframe
+		</button>
+		<button onClick="sendMessage('reset');">
+			Svuota la lista di messaggi nell'iframe
+		</button>
+
+		<iframe id="mobisit" src="http://mob.is.it/labs/html5today/window.postmessage.html" style="height: 300px; width: 50%; display: block; margin: 30px auto;">
+
+	</body>
+
+</html>

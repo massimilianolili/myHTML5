@@ -1,0 +1,39 @@
+
+<html>
+	<head>
+		<title>Esempio di windows.postmessage iframe</title>
+		<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+		<script>
+			window.addEventListener('message', function(event) {
+				if (typeof event.data == "string" ) //&& event.origin == 'http://html5today.it'
+				{
+					if(event.data == 'reset')
+					{
+						$('#messages_received').empty();
+					}
+					else
+					{
+						showMessage(event.data);
+					}
+
+				}
+			}, false);
+
+			function showMessage(message)
+			{
+				$('#messages_received').append('<li>Ho ricevuto il messaggio: <strong>' + message + '</strong></li>');
+			}
+		</script>
+	</head>
+
+	<body>
+		<h1 style="text-align: center;">
+			Questa pagina si trova su <strong>http://mob.is.it</strong>
+		</h1>
+		
+		<ul id="messages_received">
+		</ul>
+	</body>
+
+</html>
